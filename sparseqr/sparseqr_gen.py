@@ -34,6 +34,10 @@ if 'CONDA_DEFAULT_ENV' in os.environ:
             if os.path.isdir(thedir):
                 include_dirs.append(thedir)
 
+if 'CONDA_PREFIX' in os.environ:
+    include_dirs.append( os.path.join(os.environ['CONDA_PREFIX'], 'include', 'suitesparse') )
+    library_dirs.append( os.path.join(os.environ['CONDA_PREFIX'], 'lib') )
+
 if platform.system() == 'Windows':
     # https://github.com/yig/PySPQR/issues/6
     libraries.extend( ['amd','btf','camd','ccolamd','cholmod','colamd','cxsparse'
